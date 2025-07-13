@@ -77,7 +77,7 @@
       input.value = "";
       chatbox.scrollTop = chatbox.scrollHeight;
 
-      const res = await fetch("https://theodora-chatbot.worker.dev", {
+      const res = await fetch("https://hf-proxy.inv-theodora1111.workers.dev", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ message: msg })
