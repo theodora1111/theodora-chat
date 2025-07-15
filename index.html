@@ -27,12 +27,12 @@
       color: var(--texto);
       display: flex;
       flex-direction: column;
-      height: 100vh;
+      height: 100dvh;
       transition: background-color 0.6s ease, color 0.6s ease;
     }
 
     .header {
-      background-color: #000; /* fondo siempre negro */
+      background-color: #000;
       padding: 1rem;
       text-align: center;
     }
@@ -49,6 +49,7 @@
       overflow-y: auto;
       display: flex;
       flex-direction: column;
+      padding-bottom: 1rem;
     }
 
     .message {
@@ -115,27 +116,15 @@
     }
 
     @media (max-width: 600px) {
-      .logo {
-        max-width: 120px;
-      }
-
-      .chat-container {
-        padding: 0.75rem 1rem 0.5rem 1rem;
-      }
-
-      .input-area {
-        padding: 0.5rem 0.75rem;
-      }
-
+      .logo { max-width: 120px; }
+      .chat-container { padding: 0.75rem 1rem 4rem 1rem; }
+      .input-area { padding: 0.4rem 0.6rem; }
       input[type="text"],
       button {
         font-size: 0.85rem;
         padding: 0.4rem 0.8rem;
       }
-
-      .message {
-        font-size: 0.95rem;
-      }
+      .message { font-size: 0.95rem; }
     }
   </style>
 </head>
@@ -186,7 +175,7 @@
       const hour = now.getHours();
       const day = now.getDay();
       const date = now.toISOString().slice(5, 10);
-      let saludoBase = "✨ Bienvenido a Theodora 11-11. ";
+      let saludoBase = "✨ Bienvenido a Theodora 11-11. ¿Te gustaría conocer más de nuestros productos? ";
 
       if (date === "11-11") {
         return saludoBase + "Hoy es una fecha de energía especial. Nuestro Rosé Fantástico armoniza perfectamente con esta vibra.";
