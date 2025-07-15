@@ -1,62 +1,142 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <title>Theodora Chat</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Theodora 11-11</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    :root {
+      --fondo: #fff;
+      --texto: #000;
+      --burbuja-bot: #000;
+      --burbuja-user: #e0e0e0;
+      --texto-bot: #fff;
+      --texto-user: #000;
+    }
+
     body {
-      margin: 0; padding: 0;
       font-family: 'Roboto', sans-serif;
-      background-color: #fff;
-      color: #000;
-      display: flex; flex-direction: column; height: 100vh;
+      background-color: var(--fondo);
+      color: var(--texto);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      transition: background-color 0.6s ease, color 0.6s ease;
     }
 
     .header {
-      display: flex; align-items: center;
-      padding: 0.5rem 1rem;
-      background: #000; /* fondo negro */
+      background-color: var(--burbuja-bot);
+      padding: 1rem;
+      text-align: center;
+      transition: background-color 0.6s ease;
     }
 
     .logo {
-      width: 140px;   /* ajusta según tu logo */
+      max-width: 180px;
       height: auto;
-      filter: brightness(0) invert(1); /* si deseas transformar en blanco y negro */
+      filter: brightness(0) invert(1);
     }
 
     .chat-container {
       flex: 1;
       padding: 1rem;
       overflow-y: auto;
+      display: flex;
+      flex-direction: column;
     }
 
-    .message { max-width: 80%; margin: .5rem 0; padding: .8rem 1rem; border-radius: 8px; line-height: 1.4; }
+    .message {
+      max-width: 80%;
+      margin: 0.5rem 0;
+      padding: 0.8rem 1rem;
+      border-radius: 8px;
+      line-height: 1.4;
+      word-wrap: break-word;
+      animation: fadeIn 0.3s ease-in;
+    }
 
-    .user { align-self: flex-end; background-color: #e0e0e0; color: #000; }
-    .bot { align-self: flex-start; background-color: #000; color: #fff; }
+    .user {
+      align-self: flex-end;
+      background-color: var(--burbuja-user);
+      color: var(--texto-user);
+      transition: background-color 0.6s ease, color 0.6s ease;
+    }
 
-    .input-area { display: flex; padding: 1rem; border-top: 1px solid #000; }
-    .input-area input { flex: 1; padding: .5rem; border: 1px solid #000; border-radius: 4px; background: #fff; color: #000; }
-    .input-area button { margin-left: .5rem; padding: .5rem 1rem; border: 1px solid #000; background: #000; color: #fff; border-radius: 4px; cursor: pointer; }
-    .input-area button:hover { background: #333; }
+    .bot {
+      align-self: flex-start;
+      background-color: var(--burbuja-bot);
+      color: var(--texto-bot);
+      transition: background-color 0.6s ease, color 0.6s ease;
+    }
+
+    .input-area {
+      display: flex;
+      padding: 1rem;
+      border-top: 1px solid var(--texto);
+      transition: border-color 0.6s ease;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 0.6rem;
+      border: 1px solid var(--texto);
+      border-radius: 4px;
+      background: var(--fondo);
+      color: var(--texto);
+      font-size: 1rem;
+      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
+    }
+
+    button {
+      margin-left: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border: 1px solid var(--texto);
+      background: var(--texto);
+      color: var(--fondo);
+      font-size: 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
+    }
+
+    button:hover {
+      background: #333;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .logo { max-width: 120px; }
+      .input-area input,
+      .input-area button {
+        font-size: 0.9rem;
+        padding: 0.5rem;
+      }
+      .message { font-size: 0.95rem; }
+    }
   </style>
 </head>
 <body>
   <div class="header">
-    <img src="LOGO THEODORA NEGRO RIF.png" alt="Theodora 11-11" class="logo">
+    <img src="LOGO%20THEODORA%20NEGRO%20RIF.png" alt="Theodora 11-11" class="logo" />
   </div>
+
   <div class="chat-container" id="chat"></div>
+
   <div class="input-area">
-    <input type="text" id="input" placeholder="Escribe tu mensaje...">
+    <input type="text" id="input" placeholder="Escribe tu mensaje..." />
     <button id="send">Enviar</button>
   </div>
+
   <script>
     const input = document.getElementById('input');
     const send = document.getElementById('send');
     const chat = document.getElementById('chat');
 
-    // Función para agregar mensaje al chat
     function addMessage(text, className) {
       const msg = document.createElement('div');
       msg.classList.add('message', className);
@@ -65,7 +145,6 @@
       chat.scrollTop = chat.scrollHeight;
     }
 
-    // Enviar mensaje
     async function sendMessage() {
       const text = input.value.trim();
       if (!text) return;
@@ -80,9 +159,58 @@
       addMessage(data.reply, 'bot');
     }
 
-    // Listeners
     send.addEventListener('click', sendMessage);
     input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+
+    // ✨ Bienvenida emocional por hora, fecha y contexto
+    function getWelcomeMessage() {
+      const now = new Date();
+      const hour = now.getHours();
+      const day = now.getDay();
+      const date = now.toISOString().slice(5, 10);
+
+      if (date === "11-11") {
+        return "✨ Hoy es 11 de noviembre — una fecha de energía especial. Nuestro Rosé Fantástico armoniza perfectamente con esta vibra.";
+      }
+
+      if (date === "12-25") {
+        return "🎄 ¡Feliz Navidad! El Ice Dolce puede ser un regalo encantador para brindar con elegancia.";
+      }
+
+      if (date === "01-01") {
+        return "🎆 ¡Feliz Año Nuevo! Nuestro prosecco vibrante es ideal para comenzar con estilo.";
+      }
+
+      if (day === 0 || day === 6) {
+        return "✨ Es fin de semana — perfecto para relajarte con un Lemon Spritz o un vino suave para compartir.";
+      }
+
+      if (hour >= 5 && hour < 12) {
+        return "✨ Buenos días. ¿Quieres descubrir nuestros vinos, espumantes o aguas premium?";
+      } else if (hour >= 12 && hour < 20) {
+        return "✨ Buenas tardes. ¿Hay alguna ocasión especial para brindar hoy?";
+      } else {
+        return "✨ Buenas noches. ¿Te gustaría algo elegante para una cena íntima o una celebración tranquila?";
+      }
+    }
+
+    // 🌓 Activar modo noche si es después de las 20:00
+    function activarModoNoche() {
+      const hour = new Date().getHours();
+      if (hour >= 20 || hour < 5) {
+        document.documentElement.style.setProperty('--fondo', '#000');
+        document.documentElement.style.setProperty('--texto', '#fff');
+        document.documentElement.style.setProperty('--burbuja-bot', '#fff');
+        document.documentElement.style.setProperty('--texto-bot', '#000');
+        document.documentElement.style.setProperty('--burbuja-user', '#333');
+        document.documentElement.style.setProperty('--texto-user', '#fff');
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      activarModoNoche();
+      addMessage(getWelcomeMessage(), "bot");
+    });
   </script>
 </body>
 </html>
