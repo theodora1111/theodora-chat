@@ -66,21 +66,18 @@
       align-self: flex-end;
       background-color: var(--burbuja-user);
       color: var(--texto-user);
-      transition: background-color 0.6s ease, color 0.6s ease;
     }
 
     .bot {
       align-self: flex-start;
       background-color: var(--burbuja-bot);
       color: var(--texto-bot);
-      transition: background-color 0.6s ease, color 0.6s ease;
     }
 
     .input-area {
       display: flex;
       padding: 1rem;
       border-top: 1px solid var(--texto);
-      transition: border-color 0.6s ease;
     }
 
     input[type="text"] {
@@ -91,7 +88,6 @@
       background: var(--fondo);
       color: var(--texto);
       font-size: 1rem;
-      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
     }
 
     button {
@@ -103,7 +99,6 @@
       font-size: 1rem;
       border-radius: 4px;
       cursor: pointer;
-      transition: background-color 0.6s ease, color 0.6s ease, border-color 0.6s ease;
     }
 
     button:hover {
@@ -175,26 +170,27 @@
       const hour = now.getHours();
       const day = now.getDay();
       const date = now.toISOString().slice(5, 10);
-      let saludoBase = "✨ Bienvenido a Theodora 11-11. ¿Te gustaría conocer más de nuestros productos? ";
+      let saludoBase = "✨ Te damos la bienvenida a Theodora 11-11. Cada producto cuenta una historia. ¿Cuál te gustaría descubrir hoy? ";
+      let inspirador = "💬 Puedes preguntarme lo que desees, estoy aquí para inspirarte…";
 
       if (date === "11-11") {
-        return saludoBase + "Hoy es una fecha de energía especial. Nuestro Rosé Fantástico armoniza perfectamente con esta vibra.";
+        return saludoBase + "🔮 Hoy es una fecha de energía especial. Nuestro Rosé Fantástico armoniza perfectamente con esta vibra. " + inspirador;
       }
       if (date === "12-25") {
-        return saludoBase + "¡Feliz Navidad! El Ice Dolce puede ser un regalo encantador para brindar con elegancia.";
+        return saludoBase + "🎄 ¡Feliz Navidad! El Ice Dolce puede ser un regalo encantador para brindar con elegancia. " + inspirador;
       }
       if (date === "01-01") {
-        return saludoBase + "¡Feliz Año Nuevo! Nuestro prosecco vibrante es ideal para comenzar con estilo.";
+        return saludoBase + "🎆 ¡Feliz Año Nuevo! Nuestro prosecco vibrante es ideal para comenzar con estilo. " + inspirador;
       }
       if (day === 0 || day === 6) {
-        return saludoBase + "Es fin de semana — perfecto para relajarte con un Lemon Spritz o un vino suave para compartir.";
+        return saludoBase + "🍹 Es fin de semana — perfecto para relajarte con un Lemon Spritz o un vino suave para compartir. " + inspirador;
       }
       if (hour >= 5 && hour < 12) {
-        return saludoBase + "¿Quieres descubrir nuestros vinos, espumantes o aguas premium?";
+        return saludoBase + "☀️ ¿Quieres descubrir nuestros vinos, espumantes o aguas premium? " + inspirador;
       } else if (hour >= 12 && hour < 20) {
-        return saludoBase + "¿Hay alguna ocasión especial para brindar hoy?";
+        return saludoBase + "🌤️ ¿Hay alguna ocasión especial para brindar hoy? " + inspirador;
       } else {
-        return saludoBase + "¿Te gustaría algo elegante para una cena íntima o una celebración tranquila?";
+        return saludoBase + "🌙 ¿Te gustaría algo elegante para una cena íntima o una celebración tranquila? " + inspirador;
       }
     }
 
